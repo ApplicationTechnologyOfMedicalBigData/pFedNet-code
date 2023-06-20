@@ -1,0 +1,38 @@
+{
+    "task": "classification",
+    "model":"DenseNet3D",
+    "data_param":{
+      "data_random_split": true,
+      "data":"E:/01_work/02_data/010_FL_data/03_COVID2019",
+      "trainset": "E:/01_work/02_data/010_FL_data/04_COVID2019/01_a/train",
+      "testset": "E:/01_work/02_data/010_FL_data/04_COVID2019/01_a/test",
+      "data_type":"CT",
+      "channel": 1,
+      "num_classes": 2,
+      "img_size": [128, 128, 64],
+      "rotate": true
+    },
+    "bench_param":{
+        "server_address": "localhost:8091",
+        "device": "cuda:0",
+		"num_rounds": 3
+    },
+    "training_param": {
+        "epochs": 20,
+        "batch_size": 2,
+        "learning_rate": 0.001,
+        "loss_func": "cross_entropy",
+        "optimizer": "sgd",
+        "optimizer_param": {
+            "momentum": 0.9,
+			"dampening": 0,
+            "weight_decay": 0,
+            "nesterov": false
+        }
+    },
+  "testing_param": {
+        "model_path": "save_model/test_model_classification_DenseNet3D.pth",
+        "test_path": "E:/01_work/02_data/010_FL_data/04_COVID2019/01_a/test",
+        "labeled": true
+        }
+}

@@ -1,0 +1,39 @@
+{
+    "task": "segmentation",
+    "model":"UNet3D",
+    "data_param":{
+      "data_random_split": true,
+      "data":"E:/01_work/02_data/010_FL_data/011_Pancreas-CT",
+      "trainset": "E:/01_work/02_data/010_FL_data/04_COVID2019/01_a/train",
+      "testset": "E:/01_work/02_data/010_FL_data/04_COVID2019/01_a/test",
+      "data_type":"CT",
+      "channel": 1,
+      "num_classes": 2,
+      "img_size": [128, 128, 64],
+      "rotate": false
+    },
+    "bench_param":{
+        "server_address": "localhost:8091",
+        "device": "cuda:0",
+		"num_rounds": 3
+    },
+    "training_param": {
+        "epochs": 20,
+        "batch_size": 2,
+        "learning_rate": 0.001,
+        "loss_func": "cross_entropy_3d",
+        "optimizer": "adam",
+        "optimizer_param": {
+            "betas1": 0.9,
+            "betas2": 0.999,
+            "eps": 1e-08,
+            "weight_decay": 0,
+            "amsgrad": false
+        }
+    },
+  "testing_param": {
+        "model_path": "save_model/test_model_segmentation_UNet3D.pth",
+        "test_path": "E:/01_work/02_data/010_FL_data/011_Pancreas-CT/test",
+        "test_save_path": "prediction/"
+        }
+}

@@ -1,0 +1,38 @@
+{
+    "task": "classification",
+    "model":"DenseNet",
+    "data_param":{
+      "data_random_split": true,
+      "data":"/home/yawei/Documents/LUNA16/candidateOfnodules/",
+      "trainset": "./data/02_b",
+      "testset": "./data/03_c",
+      "data_type":"RGB",
+      "channel": 3,
+      "num_classes": 2,
+      "img_size": [32, 32],
+      "rotate": false
+    },
+    "bench_param":{
+        "server_address": "localhost:8091",
+        "device": "cuda:0",
+		"num_rounds": 100
+    },
+    "training_param": {
+        "epochs": 1,
+        "batch_size": 32,
+        "learning_rate": 0.01,
+        "loss_func": "cross_entropy",
+        "optimizer": "FedSgd",
+        "optimizer_param": {
+            "momentum": 0.9,
+			"dampening": 0,
+            "weight_decay": 0,
+            "nesterov": false
+        }
+    },
+  "testing_param": {
+        "model_path": "save_model/test_model_classification_DenseNet.pth",
+        "test_path": "E:/01_work/02_data/010_FL_data/02_Haemocytes/03_c",
+        "labeled": true
+        }
+}

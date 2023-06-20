@@ -1,0 +1,38 @@
+{
+    "task": "segmentation",
+    "model":"UNet2D",
+    "data_param":{
+      "data_random_split": true,
+      "data":"/home/yawei/Documents/berifen/Unet_lack01/FedStudy/unetdata/lack1",
+      "trainset": "E:/01_work/02_data/010_FL_data/06_BrainTumour_part/train",
+      "testset": "E:/01_work/02_data/010_FL_data/06_BrainTumour_part/test",
+      "data_type":"CT",
+      "channel": 3,
+      "num_classes": 2,
+      "img_size": [64,64],
+      "rotate": false
+    },
+    "bench_param":{
+        "server_address": "localhost:8090",
+        "device": "cuda:0",
+		"num_rounds": 50
+    },
+    "training_param": {
+        "epochs": 10,
+        "batch_size": 2,
+        "learning_rate": 0.001,
+        "loss_func": "cross_entropy_2d",
+        "optimizer": "sgd",
+        "optimizer_param": {
+            "momentum": 0.9,
+			"dampening": 0,
+            "weight_decay": 0,
+            "nesterov": false
+        }
+    },
+  "testing_param": {
+        "model_path": "save_model/test_model_segmentation_UNet3D.pth",
+        "test_path": "E:/01_work/02_data/010_FL_data/06_BrainTumour_part/test",
+        "test_save_path": "prediction/"
+        }
+}
